@@ -1,0 +1,25 @@
+---
+- name: install most used packages
+  hosts: nodes
+  roles:
+    - install-packages
+
+- name: create user
+  hosts: nodes
+  roles:
+    - create-user
+
+- name: copy public key
+  hosts: nodes
+  roles:
+    - copy-public-key
+
+- name: update ssh config
+  hosts: nodes
+  roles:
+    - update-ssh-config
+  handlers:
+  - name: restart ssh
+    service:
+      name=sshd
+      state=restarted
