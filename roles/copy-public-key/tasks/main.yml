@@ -1,0 +1,6 @@
+---
+- name: append public key in authorized_keys file
+  authorized_key:
+    user: ruan
+    state: present
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
