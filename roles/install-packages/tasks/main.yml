@@ -11,3 +11,5 @@
     - openssl
     - curl
     - net-tools
+    - mtr
+    - iperf3
