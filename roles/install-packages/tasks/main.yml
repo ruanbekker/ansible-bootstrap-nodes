@@ -10,3 +10,4 @@
     - wget
     - openssl
     - curl
+    - net-tools
