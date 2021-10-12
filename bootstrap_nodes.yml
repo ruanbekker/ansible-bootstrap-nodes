@@ -1,21 +1,21 @@
 ---
 - name: install most used packages
-  hosts: nodes
+  hosts: all
   roles:
     - install-packages
 
 - name: create user
-  hosts: nodes
+  hosts: all
   roles:
     - create-user
 
 - name: copy public key
-  hosts: nodes
+  hosts: all
   roles:
     - copy-public-key
 
 - name: update ssh config
-  hosts: nodes
+  hosts: all
   roles:
     - update-ssh-config
   handlers:
@@ -23,3 +23,9 @@
     service:
       name=sshd
       state=restarted
+
+- name: setup docker
+  hosts: all
+  roles:
+    - docker
+    

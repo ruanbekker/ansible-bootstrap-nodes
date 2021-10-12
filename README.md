@@ -41,3 +41,11 @@ Permission denied (publickey).
 ```
 
 Now you should be able to authenticate using your ssh private key
+
+## Localhost mode
+
+To run this playbook you can limit them to a target using `-l local`:
+
+```
+$ ansible-playbook -i inventory.ini -u root -l local bootstrap_nodes.yml
+```
