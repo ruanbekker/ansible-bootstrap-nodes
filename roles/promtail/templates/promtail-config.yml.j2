@@ -1,0 +1,18 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /var/lib/promtail/positions.yaml
+
+clients:
+  - url: {{ loki_http_protocol }}://{{ loki_username }}:{{ loki_password }}@{{ loki_server_ip }}:{{ loki_server_port }}/loki/api/v1/push
+
+scrape_configs:
+ - job_name: system
+   pipeline_stages:
+   static_configs:
+   - labels:
+      job: serverlogs
+      host: {{ server_hostname }}
+      __path__: /var/log/syslog

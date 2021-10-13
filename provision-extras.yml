@@ -8,3 +8,8 @@
   hosts: all
   roles:
     - node-exporter
+
+- name: setup promtail
+  hosts: all
+  roles:
+    - promtail
