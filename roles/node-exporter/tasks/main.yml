@@ -7,11 +7,11 @@
     group: root
     mode: '0755'
 
-- name: download promtail
+- name: download node-exporter
   unarchive:
     src: "https://github.com/prometheus/node_exporter/releases/download/v{{ ne_version }}/node_exporter-{{ ne_version }}.linux-{{ arch }}.tar.gz"
     dest: "/opt/node-exporter/{{ ne_version }}"
-    extra_opts: '-j'
+    extra_opts: [--strip-components=1]
     remote_src: yes
 
 - name: copy node_exporter binary
@@ -36,4 +36,4 @@
     state: restarted
     daemon_reload: yes
     enabled: yes
-    name: node-exporter
+    name: node_exporter
