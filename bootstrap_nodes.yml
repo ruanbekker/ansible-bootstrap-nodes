@@ -23,9 +23,4 @@
     service:
       name=sshd
       state=restarted
-
-- name: setup docker
-  hosts: all
-  roles:
-    - docker
     

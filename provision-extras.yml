@@ -1,0 +1,10 @@
+---
+- name: setup docker
+  hosts: all
+  roles:
+    - docker
+
+- name: setup node-exporter
+  hosts: all
+  roles:
+    - node-exporter

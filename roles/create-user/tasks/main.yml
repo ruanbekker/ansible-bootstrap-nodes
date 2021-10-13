@@ -5,8 +5,12 @@
         shell=/bin/bash
         generate_ssh_key=yes
         state=present
+  tags:
+    - basic
 
 - name: copy sudoers file for user
   copy: src=sudoers
         dest=/etc/sudoers.d
         mode=0440
+  tags:
+    - basic

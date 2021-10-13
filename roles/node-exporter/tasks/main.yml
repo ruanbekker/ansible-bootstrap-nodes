@@ -1,0 +1,39 @@
+---
+- name: create /opt/node-exporter directory
+  file:
+    path: "/opt/node-exporter/{{ ne_version }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: download promtail
+  unarchive:
+    src: "https://github.com/prometheus/node_exporter/releases/download/v{{ ne_version }}/node_exporter-{{ ne_version }}.linux-{{ arch }}.tar.gz"
+    dest: "/opt/node-exporter/{{ ne_version }}"
+    extra_opts: '-j'
+    remote_src: yes
+
+- name: copy node_exporter binary
+  copy:
+    src: "/opt/node-exporter/{{ ne_version }}/node_exporter"
+    dest: /usr/bin/node_exporter
+    owner: root
+    group: root
+    mode: a+x
+    remote_src: yes
+
+- name: generate node-exporter systemd unit file from template
+  template:
+    src: node_exporter.service.j2
+    dest: /etc/systemd/system/node_exporter.service
+    owner: root
+    group: root
+    mode: 0644
+
+- name: enable and start node-exporter
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+    name: node-exporter
