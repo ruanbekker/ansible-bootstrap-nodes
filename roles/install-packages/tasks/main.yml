@@ -14,5 +14,6 @@
     - mtr
     - iperf3
     - jq
+    - locales-all
   tags:
     - basic
